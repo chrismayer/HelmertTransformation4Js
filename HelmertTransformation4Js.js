@@ -9,7 +9,7 @@
  * 
  * @author Christian Mayer
  * 
- * @version 0.1
+ * @version 1.0
  * 
  * @license BSD see license.txt
  * 
@@ -42,12 +42,12 @@ function HelmertTransformation4Js(y0, x0, o, a) {
 	this.x0 = x0;
 	
 	/**
-	 * The 'o' parameter having the ...
+	 * The 'o' parameter having the scale and rotation
 	 */
 	this.o = o;
 	
 	/**
-	 * The 'a' parameter having the ...
+	 * The 'a' parameter having the the scale and rotation
 	 */
 	this.a = a;
 	
