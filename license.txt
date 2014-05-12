@@ -5,7 +5,7 @@ License: BSD License (http://www.opensource.org/licenses/bsd-license.php)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Copyright (c) 2012 Christian Mayer
+Copyright (c) 2014 Christian Mayer
 
 All rights reserved.
 
