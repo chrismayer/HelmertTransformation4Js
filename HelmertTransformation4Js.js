@@ -66,7 +66,7 @@ function HelmertTransformation4Js(y0, x0, o, a) {
         var xIn = x;
         var yIn = y;
 
-        if (typeof round === "undefined" || round == null) {
+        if (typeof round === "undefined" || round === null) {
             round = false;
         }
 
@@ -81,8 +81,8 @@ function HelmertTransformation4Js(y0, x0, o, a) {
         return {
             x: x,
             y: y
-        }
-    }
+        };
+    };
 
     /**
      * Calculate transformation from destination to origin
@@ -98,7 +98,7 @@ function HelmertTransformation4Js(y0, x0, o, a) {
      */
     HelmertTransformation4Js.prototype.doReverseTransformation = function(x, y, round) {
 
-        if (typeof round === "undefined" || round == null) {
+        if (typeof round === "undefined" || round === null) {
             round = false;
         }
 
@@ -120,7 +120,7 @@ function HelmertTransformation4Js(y0, x0, o, a) {
         return {
             x: y,
             y: x
-        }
+        };
 
-    }
+    };
 }
