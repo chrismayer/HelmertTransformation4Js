@@ -9,7 +9,7 @@
  *
  * @author Christian Mayer
  *
- * @version 1.1-dev
+ * @version 1.0
  *
  * @license BSD see license.txt
  *
