@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Helmert Transformation</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <style media="screen">
+      body {
+        padding: 5px;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <script src="./helmert-trafo.js" charset="utf-8"></script>
+
+    <form class="form-horizontal">
+      <fieldset>
+
+      <!-- Form Name -->
+      <legend>4 Parameter Helmert Transformation</legend>
+
+      <!-- Insert example values Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="default-btn"></label>
+        <div class="col-md-4">
+          <button id="default-btn" name="default-btn" onclick="insertExampleVals(); return false;" class="btn btn-default">Insert example values</button>
+        </div>
+      </div>
+
+      <!-- Label Transformation Parameters -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textarea"></label>
+        <div class="col-md-4">
+          <div id="sss" style="font-size: larger;">Transformation Parameters</div>
+        </div>
+      </div>
+
+      <!-- Input y0 -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="y0">y0</label>
+        <div class="col-md-4">
+        <input id="y0" name="y0" type="number" placeholder="The y0 parameter of the transformation" class="form-control input-md" required="">
+
+        </div>
+      </div>
+
+      <!-- Input x0 -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="x0">x0</label>
+        <div class="col-md-4">
+        <input id="x0" name="x0" type="number" placeholder="The x0 parameter of the transformation" class="form-control input-md" required="">
+
+        </div>
+      </div>
+
+      <!-- Input o -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="o">o</label>
+        <div class="col-md-4">
+        <input id="o" name="o" type="number" placeholder="The o parameter of the transformation" class="form-control input-md" required="">
+
+        </div>
+      </div>
+
+      <!-- Input a -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="a">a</label>
+        <div class="col-md-4">
+        <input id="a" name="a" type="number" placeholder="The a parameter of the transformation" class="form-control input-md" required="">
+
+        </div>
+      </div>
+
+      <!-- Label Input Coordinates -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <div style="font-size: larger;">Input Coordinates</div>
+        </div>
+      </div>
+
+
+      <!-- Input Y -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="y">Y</label>
+        <div class="col-md-4">
+        <input id="y" name="y" type="number" placeholder="Y coordinate (RW) to transform" class="form-control input-md" required="">
+
+        </div>
+      </div>
+
+      <!-- Input X-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="x">X</label>
+        <div class="col-md-4">
+        <input id="x" name="y" type="number" placeholder="X coordinate (HW) to transform" class="form-control input-md" required="">
+
+        </div>
+      </div>
+
+      <!-- Round Checkbox -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="checkboxes"></label>
+        <div class="col-md-4">
+        <div class="checkbox">
+          <label for="checkboxes-0">
+            <input id="round-cbox" type="checkbox" name="checkboxes">
+            Round output values (3 digits)
+          </label>
+      	</div>
+        </div>
+      </div>
+
+      <!-- Transform button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="calculate"></label>
+        <div class="col-md-4">
+          <button id="calculate" name="calculate" onclick="doTransformation(); return false;" class="btn btn-primary">Transform</button>
+        </div>
+      </div>
+
+      <!-- Reverse Transform button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="rev-calculate"></label>
+        <div class="col-md-4">
+          <button id="rev-calculate" name="rev-calculate" onclick="doTransformation(true); return false;" class="btn btn-primary">Reverse Transform</button>
+        </div>
+      </div>
+
+      <!-- Result output -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textarea">Output</label>
+        <div class="col-md-4">
+          <div id="output" style="font-size: larger;"></div>
+        </div>
+      </div>
+
+      </fieldset>
+    </form>
+
+    <script type="text/javascript">
+
+      function insertExampleVals() {
+        // demo values
+        const y0 = 200996.148;
+        const x0 = 1251460.485
+        const o =  -0.801798904;
+        const a = 0.597593941;
+        const y = 960;
+        const x = 1000;
+
+        document.querySelector('#y0').value = y0;
+        document.querySelector('#x0').value = x0;
+        document.querySelector('#o').value = o;
+        document.querySelector('#a').value = a;
+
+        document.querySelector('#y').value = y;
+        document.querySelector('#x').value = x;
+      }
+
+      function doTransformation(reverse) {
+        const y0 = parseFloat(document.querySelector('#y0').value, 10);
+        const x0 = parseFloat(document.querySelector('#x0').value, 10);
+        const o = parseFloat(document.querySelector('#o').value, 10);
+        const a = parseFloat(document.querySelector('#a').value, 10);
+
+        const y = parseFloat(document.querySelector('#y').value, 10);
+        const x = parseFloat(document.querySelector('#x').value, 10);
+
+        const round = document.querySelector('#round-cbox').checked;
+
+        const ht = new HelmertTransformation(y0, x0, o, a);
+        let transformedPt;
+        if (reverse === true) {
+          transformedPt = ht.doReverseTransformation(y, x, round);
+        } else {
+          transformedPt = ht.doTransformation(y, x, round);
+        }
+
+        document.querySelector('#output').innerHTML = '<code>' + JSON.stringify(transformedPt, null, 2) + '</code>';
+      }
+
+    </script>
+
+
+  </body>
+</html>
